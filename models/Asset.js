@@ -21,5 +21,4 @@ var Asset = mongoose.model('Asset', {
       default:null;
     }
   });
-  
   module.exports = {Asset};
