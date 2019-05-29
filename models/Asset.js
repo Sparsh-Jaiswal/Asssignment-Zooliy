@@ -9,16 +9,16 @@ var Asset = mongoose.model('Asset', {
     Reciever: {
         type: String,
         required: true,
-        minlength: 1,
+        minlength: 1
     },
     Sender: {
         type: String,
-        required:true;
+        required:true,
         minlength: 1
     },
     Timestamp: {
       type: Date,
-      default:null;
+      default:null
     }
   });
   module.exports = {Asset};
