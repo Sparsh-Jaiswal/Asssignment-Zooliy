@@ -18,7 +18,7 @@ var Asset = mongoose.model('Asset', {
     },
     Timestamp: {
       type: Date,
-      default:null
+      default:Date.now()
     }
   });
   module.exports = {Asset};

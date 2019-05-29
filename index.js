@@ -20,19 +20,19 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 app.post('/transfers',async(req,res) => {
-    console.log("level1");
+    //console.log("level1");
     try{
+        console.log(req.body);
         var ass=new Asset({
             Info: req.body.Info ,
             Reciever: req.body.Reciever,
             Sender: req.body.Sender ,
-            timestamp: new Timestamp()});
-            console.log("level2");
+            timestamp: new Date()});
         var doc=await ass.save();
         res.send(doc);
-        //res.send("Hello World2");
     }
     catch(e){
+        console.log(e);
         res.status(400).send();
     }
 });
@@ -44,7 +44,6 @@ app.get('/transfers',async(req,res) => {
     catch(e){
         res.status(400).send();
     }
-    //res.send('Hello World!');
 });
 
 app.put('/transfers',async(req,res)=> {
