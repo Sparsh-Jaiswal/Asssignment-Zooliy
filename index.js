@@ -6,7 +6,6 @@ const mongoose=require('mongoose');
 var {Asset} = require('./models/Asset');
 
 const url = 'mongodb://localhost:27017';
-
 const connect = mongoose.connect(url);
 
 connect.then((db) => {
@@ -27,7 +26,8 @@ app.post('/transfer',async(req,res) => {
             Info: req.body.Info ,
             Reciever: req.body.Reciever,
             Sender: req.body.Sender ,
-            Timestamp: new Date()});
+            Timestamp: new Date() 
+        });
         var doc=await ass.save();
         res.send(doc);
     }
@@ -48,11 +48,27 @@ app.get('/transfer',async(req,res) => {
     }
 });
 
+app.get('/transfer/:id',async(req,res)=> {
+    try{
+        var id=req.params.id;
+        var ass=await Asset.find({
+            Timestamp: id
+        });
+        console.log(ass);
+        res.send(ass);
+    }
+    catch(e){
+        console.log(e);
+        res.status(400).send();
+    }
+});
+
 app.put('/transfer',async(req,res)=> {
     try{
         res.send("Put Operation Currently not Available on Transfers");
     }
     catch(e){
+        console.log(e);
         res.status(400).send();
     }
 });
@@ -62,6 +78,7 @@ app.delete('/transfer',async(req,res)=> {
         res.send("Delete Operation Currently not Available on Transfers");
     }
     catch(e){
+        console.log(e);
         res.status(400).send();
     }
 });
